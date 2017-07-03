@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HRM</string>
+    <string name="devices">Devices</string>
+    <string name="readings">Readings</string>
 </resources>
