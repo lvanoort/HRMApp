@@ -2,16 +2,23 @@ package com.lukevanoort.hrm
 
 import android.app.Application
 import android.content.Context
+import android.os.Looper
 import com.lukevanoort.hrm.ui.ActivityComponent
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Qualifier
 
 ///*
 @Qualifier
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class AppContext
+
+@Qualifier
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class OnUiThread
 
 class HrmApplication : Application() {
     private lateinit var appComponent: AppComponent
@@ -37,6 +44,17 @@ class AppModule(val app: HrmApplication) {
     @Provides
     @AppScope
     fun provideAppContext(): Context = app
+
+
+    @Provides
+    @AppScope
+    @OnUiThread
+    fun provideUiScheduler(): Scheduler = AndroidSchedulers.mainThread()
+
+    @Provides
+    @AppScope
+    @OnUiThread
+    fun provideUiLooper(): Looper = Looper.getMainLooper()
 }
 
 @Component(modules = arrayOf(AppModule::class))

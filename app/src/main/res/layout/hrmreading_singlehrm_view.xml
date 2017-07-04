@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.support.constraint.ConstraintLayout"
+    >
+    <ImageView
+        android:id="@+id/iv_heart_background"
+        android:layout_width="168dp"
+        android:layout_height="168dp"
+        android:tint="@color/colorAccent"
+        app:srcCompat="@drawable/ic_favorite_black_128dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Display3"
+        android:id="@+id/tv_heartrate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:textColor="@color/accentContrast"
+        android:text="@string/no_heartrate_placeholder"
+        app:layout_constraintStart_toStartOf="@+id/iv_heart_background"
+        app:layout_constraintEnd_toEndOf="@+id/iv_heart_background"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_heart_background"
+        app:layout_constraintTop_toTopOf="@+id/iv_heart_background"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.222" />
+</merge>
