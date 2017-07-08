@@ -10,5 +10,10 @@
         android:title="@string/readings"
         android:icon="@drawable/ic_view_readings_24dp"
         />
+    <item
+        android:id="@+id/nav_app_settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        />
 
 </menu>

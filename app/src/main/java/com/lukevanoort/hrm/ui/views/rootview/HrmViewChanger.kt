@@ -13,6 +13,7 @@ import com.lukevanoort.hrm.R
 import com.lukevanoort.hrm.ui.views.inflateChildren
 import com.lukevanoort.hrm.ui.views.pickdevices.PickDevicesView
 import com.lukevanoort.hrm.ui.views.reading.HrmReadingView
+import com.lukevanoort.hrm.ui.views.settings.AppSettingsView
 import kotlinx.android.synthetic.main.root_view_layout.view.*
 
 class RootView : ConstraintLayout {
@@ -43,6 +44,11 @@ class RootView : ConstraintLayout {
                     vp_main_view_pager.currentItem = currentIdx
                     true
                 }
+                R.id.nav_app_settings -> {
+                    currentIdx = OptionAadapter.IDX_SETTINGS
+                    vp_main_view_pager.currentItem = currentIdx
+                    true
+                }
                 else -> false
             }
         }
@@ -63,6 +69,10 @@ class RootView : ConstraintLayout {
             }
             OptionAadapter.IDX_READING -> {
                 vp_main_view_pager.currentItem = OptionAadapter.IDX_READING
+                bnv_main_navigation.selectedItemId = R.id.nav_see_reading
+            }
+            OptionAadapter.IDX_SETTINGS -> {
+                vp_main_view_pager.currentItem = OptionAadapter.IDX_SETTINGS
                 bnv_main_navigation.selectedItemId = R.id.nav_see_reading
             }
         }
@@ -131,6 +141,12 @@ private class OptionAadapter: PagerAdapter() {
                 container.addView(view)
                 return view
             }
+            IDX_SETTINGS -> {
+                val view = AppSettingsView(container.context)
+                view.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
+                container.addView(view)
+                return view
+            }
             else -> {
                 throw IllegalArgumentException("Invalid index")
             }
@@ -143,10 +159,11 @@ private class OptionAadapter: PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any?): Boolean = view == `object`
 
-    override fun getCount(): Int = 2
+    override fun getCount(): Int = 3
 
     companion object {
         val IDX_DEVICES = 0
         val IDX_READING = 1
+        val IDX_SETTINGS = 2
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/list_item_margin"
+        android:layout_marginTop="@dimen/list_item_margin"
+        android:layout_marginEnd="@dimen/list_item_margin"
+        android:layout_marginBottom="@dimen/list_item_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_title"
+        tools:src="@drawable/ic_favorite_black_128dp"
+        />
+    <TextView
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/list_item_margin"
+        android:layout_marginTop="@dimen/list_item_margin"
+        android:layout_marginEnd="@dimen/list_item_margin"
+        android:layout_marginBottom="@dimen/list_item_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="MY AWESOME HRM"
+        />
+
+</android.support.constraint.ConstraintLayout>
