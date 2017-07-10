@@ -15,9 +15,42 @@ import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
 import com.hannesdorfmann.adapterdelegates3.ListDelegationAdapter
 import com.lukevanoort.hrm.R
+import com.lukevanoort.hrm.business.state.ActiveDevicesController
+import com.lukevanoort.hrm.business.state.ActiveDevicesState
+import com.lukevanoort.hrm.business.state.SingleDeviceState
 import com.lukevanoort.hrm.ui.views.inflateChildren
 import com.lukevanoort.hrm.ui.views.tintDrawableResource
+import io.reactivex.Observable
 import org.jetbrains.anko.textResource
+import javax.inject.Inject
+
+data class PickDevicesViewState(val activeDeices: Collection<SingleDeviceState>,
+                                val nearbyDevices: Collection<BluetoothDevice>,
+                                val recentDevices: Collection<BluetoothDevice>)
+
+interface PickDevicesViewModel {
+    fun getState(): Observable<PickDevicesViewState>
+    fun activateDevice(device: BluetoothDevice)
+    fun deactivateDevice(device: BluetoothDevice)
+}
+
+class PickDeviceViewModelImpl @Inject constructor(
+        val activeState: Observable<ActiveDevicesState>,
+        val activeController: ActiveDevicesController) : PickDevicesViewModel {
+
+    override fun getState(): Observable<PickDevicesViewState> {
+
+    }
+
+    override fun activateDevice(device: BluetoothDevice) {
+        activeController.requestActivateDevice(device)
+    }
+
+    override fun deactivateDevice(device: BluetoothDevice) {
+        activeController.requestActivateDevice(device)
+    }
+
+}
 
 class PickDevicesView : RecyclerView {
     constructor(context: Context) : super(context) {
@@ -37,13 +70,13 @@ class PickDevicesView : RecyclerView {
 }
 
 private sealed class PickDeviceRow {
-    data class RecentDevice(val device: BluetoothDevice) : PickDeviceRow(){
+    data class RecentDevice(val device: Tater) : PickDeviceRow(){
         fun getName() = device.name
     }
-    data class ActiveDevice(val device: BluetoothDevice) : PickDeviceRow() {
+    data class ActiveDevice(val device: Tater) : PickDeviceRow() {
         fun getName() = device.name
     }
-    data class NearbyDevice(val device: BluetoothDevice) : PickDeviceRow() {
+    data class NearbyDevice(val device: Tater) : PickDeviceRow() {
         fun getName() = device.name
     }
     data class Heading(@StringRes val textRes: Int) : PickDeviceRow()

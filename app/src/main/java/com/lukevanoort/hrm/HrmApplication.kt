@@ -3,6 +3,7 @@ package com.lukevanoort.hrm
 import android.app.Application
 import android.content.Context
 import android.os.Looper
+import com.lukevanoort.hrm.business.state.StateModule
 import com.lukevanoort.hrm.ui.ActivityComponent
 import dagger.Component
 import dagger.Module
@@ -19,6 +20,10 @@ annotation class AppContext
 @Qualifier
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class OnUiThread
+
+@Qualifier
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class OnStateThread
 
 class HrmApplication : Application() {
     private lateinit var appComponent: AppComponent
@@ -55,9 +60,14 @@ class AppModule(val app: HrmApplication) {
     @AppScope
     @OnUiThread
     fun provideUiLooper(): Looper = Looper.getMainLooper()
+
+    @Provides
+    @AppScope
+    @OnStateThread
+    fun provideStateLooper(): Looper = Looper.getMainLooper()
 }
 
-@Component(modules = arrayOf(AppModule::class))
+@Component(modules = arrayOf(AppModule::class, StateModule::class))
 @AppScope
 interface AppComponent {
     fun provideActBuild(): ActivityComponent.Builder
