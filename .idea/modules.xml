@@ -3,8 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HRM.iml" filepath="$PROJECT_DIR$/HRM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HRMApp.iml" filepath="$PROJECT_DIR$/HRMApp.iml" />
       <module fileurl="file://D:\Android\projects\personal\HRM\HRMApp.iml" filepath="D:\Android\projects\personal\HRM\HRMApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business.iml" filepath="$PROJECT_DIR$/business/business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dagger/dagger.iml" filepath="$PROJECT_DIR$/dagger/dagger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ui/ui.iml" filepath="$PROJECT_DIR$/ui/ui.iml" />
     </modules>
   </component>
 </project>
