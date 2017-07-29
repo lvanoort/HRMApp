@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HRM.iml" filepath="$PROJECT_DIR$/HRM.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HRMApp.iml" filepath="$PROJECT_DIR$/HRMApp.iml" />
       <module fileurl="file://D:\Android\projects\personal\HRM\HRMApp.iml" filepath="D:\Android\projects\personal\HRM\HRMApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

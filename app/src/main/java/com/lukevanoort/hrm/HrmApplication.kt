@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Looper
 import com.lukevanoort.hrm.business.state.StateModule
+import com.lukevanoort.hrm.model.SerializationModule
 import com.lukevanoort.hrm.ui.ActivityComponent
 import dagger.Component
 import dagger.Module
@@ -65,9 +66,10 @@ class AppModule(val app: HrmApplication) {
     @AppScope
     @OnStateThread
     fun provideStateLooper(): Looper = Looper.getMainLooper()
+
 }
 
-@Component(modules = arrayOf(AppModule::class, StateModule::class))
+@Component(modules = arrayOf(AppModule::class, StateModule::class, SerializationModule::class))
 @AppScope
 interface AppComponent {
     fun provideActBuild(): ActivityComponent.Builder

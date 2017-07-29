@@ -1,10 +1,9 @@
 package com.lukevanoort.hrm.business.state
 
-import android.bluetooth.BluetoothDevice
 import android.os.Looper
 import com.lukevanoort.hrm.AppScope
 import com.lukevanoort.hrm.OnStateThread
-import com.lukevanoort.hrm.OnUiThread
+import com.lukevanoort.hrm.model.HrmDeviceRecord
 import javax.inject.Inject
 
 enum class ConnectionStatus {
@@ -14,16 +13,16 @@ enum class ConnectionStatus {
     ERROR
 }
 
-data class SingleDeviceState(val device: BluetoothDevice,
+data class SingleDeviceState(val device: HrmDeviceRecord,
                              val connectionStatus: ConnectionStatus,
                              val lastReading: Int?)
 
 data class ActiveDevicesState(val activeDevices: Map<String, SingleDeviceState>,
-                              val requestedActiveDevices: Map<String,BluetoothDevice>)
+                              val requestedActiveDevices: Map<String,HrmDeviceRecord>)
 
 interface ActiveDevicesController {
-    fun requestActivateDevice(device: BluetoothDevice)
-    fun requestDeactivateDevice(device: BluetoothDevice)
+    fun requestActivateDevice(device: HrmDeviceRecord)
+    fun requestDeactivateDevice(device: HrmDeviceRecord)
 }
 
 @AppScope
@@ -31,9 +30,11 @@ class ActiveDevicesStateEducer : Educer<ActiveDevicesState>, ActiveDevicesContro
 
     constructor(initialValue: ActiveDevicesState, mutationLooper: Looper) : super(initialValue, mutationLooper)
     @Inject
-    constructor(@OnStateThread mutationLooper: Looper) : super(ActiveDevicesState(mapOf<String, SingleDeviceState>(), mapOf<String, BluetoothDevice>()), mutationLooper)
+    constructor(@OnStateThread mutationLooper: Looper) :
+            super(ActiveDevicesState(
+                    mapOf<String, SingleDeviceState>(), mapOf<String, HrmDeviceRecord>()), mutationLooper)
 
-    override fun requestActivateDevice(device: BluetoothDevice) = conditionalMutate {
+    override fun requestActivateDevice(device: HrmDeviceRecord) = conditionalMutate {
         if(it.requestedActiveDevices.containsKey(device.address)) {
             Pair(false,it)
         } else {
@@ -44,7 +45,7 @@ class ActiveDevicesStateEducer : Educer<ActiveDevicesState>, ActiveDevicesContro
         }
     }
 
-    override fun requestDeactivateDevice(device: BluetoothDevice)  = conditionalMutate {
+    override fun requestDeactivateDevice(device: HrmDeviceRecord)  = conditionalMutate {
         if(it.requestedActiveDevices.containsKey(device.address)) {
             val mutMap = it.requestedActiveDevices.toMutableMap()
             val oldItem = mutMap.remove(device.address)
